@@ -10,40 +10,62 @@ import SwiftUI
 struct ContentView: View {
     
     @State var alertIsVisible: Bool = false
-    @State var knockIsVisible: Bool = false
     
     var body: some View {
         VStack {
-            Text("Welcome to my first app")
-                .fontWeight(.semibold)
-                .foregroundColor(Color.green)
+            Spacer()
+            // Target row
+            HStack {
+                Text("Put the bullseye as close as you can to:")
+                Text("100")
+            }
+            Spacer()
+            
+            // Slider row
+            HStack {
+                Text("1")
+                Slider(value: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant(10)/*@END_MENU_TOKEN@*/)
+                Text("100")
+            }
+            // Button row
+            Spacer()
+            
             Button(action: {
                 print("Button pressed")
                 self.alertIsVisible = true
             }) {
                 Text("Hit Me!")
             }
-            Button(action: {
-                print("Knock Knock")
-                self.knockIsVisible = true
-            }) {
-                Text("Knock Knock")
-            }
+
             .alert(isPresented: $alertIsVisible) { () ->
                 Alert in
                 return Alert(title: Text("Hello there!"), message: Text("General Kenobi"), dismissButton: .default(Text("Awesome!")))
             }
-            .alert(isPresented: $knockIsVisible) { () ->
-                Alert in
-                return Alert(title: Text("Whos There?"), message: Text("Lilly"), dismissButton: .default(Text("Lilly is a weirdo")))
-            }
+            Spacer()
+            
+            // Score row
+            HStack {
+                Button(action: {}) {
+                    Text("Start over")
+                }
+                Spacer()
+                Text("Score:")
+                Text("999999")
+                Text("Round:")
+                Text("999")
+                Spacer()
+                Button(action: {}) {
+                    Text("Info")
+                }
+                
+            }.padding(.bottom, 20)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().previewLayout(.fixed(width: 896, height: 414))
     }
 }
  
